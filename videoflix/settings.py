@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-4x50a*jix_c*j!i9jqi1xrb09+p_w55=58s93)#pck32(%7shy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
+
+# Because of CORS
+CORS_ALLOWED_ORIGIN = ['http://localhost:4200']
 
 # Cache time to live is 15 minutes.
 CACHE_TTL = 60 * 15
@@ -45,13 +48,20 @@ INSTALLED_APPS = [
     'django_rq',
     'import_export',
     'user',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
+
+
+
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
+# First Entry because of CORS
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

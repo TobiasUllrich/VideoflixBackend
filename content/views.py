@@ -3,7 +3,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
-
+from rest_framework.authtoken.views import ObtainAuthToken 
+from rest_framework.authtoken.models import Token 
+from rest_framework.response import Response 
+from .serializers import UsersSerializer
 
 # Create your views here.
 
@@ -16,3 +19,11 @@ def videos_view(request):
   This is a view that allows videos to be viewed
  """
  return render(request, 'videos/videos.html')
+
+class LoginView(ObtainAuthToken): 
+ def post(self, request, *args, **kwargs): 
+  serializer = self.UsersSerializer(data=request.data, context={'request': request}) 
+  serializer.is_valid(raise_exception=True) 
+  user = serializer.validated_data['user'] 
+  token, created = Token.objects.get_or_create(user=user) 
+  return Response({ 'token': token.key, 'user_id': user.pk, 'email': user.email })
