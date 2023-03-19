@@ -26,10 +26,14 @@ SECRET_KEY = 'django-insecure-4x50a*jix_c*j!i9jqi1xrb09+p_w55=58s93)#pck32(%7shy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 # Because of CORS
-CORS_ALLOWED_ORIGIN = ['http://localhost:4200']
+#CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:4200'
+]
+
 
 # Cache time to live is 15 minutes.
 CACHE_TTL = 60 * 15
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
     'user',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework.authtoken import views
+from content.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,5 @@ urlpatterns = [
 
 
 urlpatterns += [
-    path('get-token/', views.obtain_auth_token)
+    path('login/', LoginView.as_view())
 ]
