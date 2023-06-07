@@ -173,15 +173,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 
-# This defines the url for static files
-# eg: base-url.com/static/your-js-file.js
+# STATIC_URL = '/static/' besagt, dass /static/ die URL für statische Dateien ist
+# eg: http://127.0.0.1:8000/static/js/board.js
 STATIC_URL = '/static/'
-# This is directory name where collectstatic files command will put your app level static files
-STATIC_ROOT = 'staticfiles'
-# This is directory paths where you have to put your project level static files
-# you can put multiple folders here
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
+# Diese Einstellung definiert den absoluten Dateisystempfad zum Verzeichnis, das alle gesammelten statischen Dateien aus all Ihren Anwendungen enthält. 
+# Dieses Verzeichnis sollte als Ziel einer serverseitigen Datei-Serving-Lösung (z. B. Apache oder Nginx) verwendet werden, um die statischen Dateien zu servieren. 
+# Der collectstatic-Verwaltungsbefehl (python manage.py collectstatic) sammelt alle statischen Dateien aus den verschiedenen Anwendungen 
+# und legt sie im von STATIC_ROOT angegebenen Verzeichnis ab.
+STATIC_ROOT = 'staticfiles'
+
+# This is directory paths where you have to put your project level static files
+# you can put multiple folders here; Hier sucht Django nach statischen Dateien
+STATICFILES_DIRS = (
+ os.path.join(BASE_DIR, "static"),
+)
 
 
 # Default primary key field type
